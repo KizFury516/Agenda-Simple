@@ -28,7 +28,7 @@ agenda_app/
 
 La app está publicada con GitHub Pages en:
 
-`https://TU-USUARIO.github.io/agenda-app/`
+`https://KizFury516.github.io/agenda-app/`
 
 Ábrela desde el navegador del móvil y usa "Añadir a pantalla de inicio" para instalarla como una app.
 
