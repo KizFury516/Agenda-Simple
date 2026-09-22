@@ -134,6 +134,48 @@ function setFilter(filter) {
   render();
 }
 
+/* =========================
+   Sección opcional desplegable
+   ========================= */
+
+function setOptionalSection(open) {
+  const content = document.getElementById('optionalContent');
+  const toggleBtn = document.getElementById('optionalToggleBtn');
+  const label = document.getElementById('optionalToggleLabel');
+
+  content.classList.toggle('open', open);
+  toggleBtn.classList.toggle('open', open);
+  label.textContent = open ? 'Ocultar detalles opcionales' : 'Añadir detalles opcionales';
+}
+
+function toggleOptionalSection() {
+  const isOpen = document.getElementById('optionalContent').classList.contains('open');
+  setOptionalSection(!isOpen);
+}
+
+/* =========================
+   Validación de campos
+   ========================= */
+
+function clearFieldError(inputId, errorId) {
+  document.getElementById(inputId).classList.remove('invalid');
+  document.getElementById(errorId).parentElement.classList.remove('has-error');
+}
+
+function setFieldError(inputId, errorId) {
+  document.getElementById(inputId).classList.add('invalid');
+  document.getElementById(errorId).parentElement.classList.add('has-error');
+}
+
+function clearAllFieldErrors() {
+  clearFieldError('inpTitulo', 'errorTitulo');
+  clearFieldError('inpFecha', 'errorFecha');
+}
+
+/* =========================
+   Añadir / editar
+   ========================= */
+
 function openAddSheet() {
   editingId = null;
   newType = 'evento';
@@ -141,6 +183,8 @@ function openAddSheet() {
   document.getElementById('sheetTitle').textContent = 'Nuevo elemento';
 
   setType('evento');
+  clearAllFieldErrors();
+  setOptionalSection(false);
 
   document.getElementById('inpTitulo').value = '';
   document.getElementById('inpFecha').value =
@@ -159,12 +203,19 @@ function openEditSheet(item) {
   document.getElementById('sheetTitle').textContent = 'Editar elemento';
 
   setType(item.tipo);
+  clearAllFieldErrors();
 
   document.getElementById('inpTitulo').value = item.titulo;
   document.getElementById('inpFecha').value = item.fecha;
   document.getElementById('inpHora').value = item.hora;
   document.getElementById('inpLugar').value = item.lugar || '';
   document.getElementById('inpAsignatura').value = item.asignatura || '';
+
+  const hasOptionalValue =
+    (item.tipo === 'entrega' && item.asignatura) ||
+    (item.tipo === 'evento' && item.lugar);
+
+  setOptionalSection(Boolean(hasOptionalValue));
 
   editOverlay.classList.add('open');
 }
@@ -194,12 +245,28 @@ function setType(type) {
 }
 
 function saveCurrentItem() {
-  const titulo = document.getElementById('inpTitulo').value.trim();
-  const fecha = document.getElementById('inpFecha').value;
+  const tituloInput = document.getElementById('inpTitulo');
+  const fechaInput = document.getElementById('inpFecha');
+
+  const titulo = tituloInput.value.trim();
+  const fecha = fechaInput.value;
   const hora = document.getElementById('inpHora').value;
 
-  if (!titulo || !fecha) {
-    alert('Por favor, añade al menos un título y una fecha.');
+  clearAllFieldErrors();
+
+  let hasError = false;
+
+  if (!titulo) {
+    setFieldError('inpTitulo', 'errorTitulo');
+    hasError = true;
+  }
+
+  if (!fecha) {
+    setFieldError('inpFecha', 'errorFecha');
+    hasError = true;
+  }
+
+  if (hasError) {
     return;
   }
 

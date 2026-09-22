@@ -434,6 +434,26 @@ main {
   border-color: var(--text);
 }
 
+/* Campo obligatorio no completado */
+.field input.invalid {
+  border-color: var(--danger);
+}
+
+.field input.invalid:focus {
+  border-color: var(--danger);
+}
+
+.field-error {
+  display: none;
+  font-size: 12px;
+  color: var(--danger);
+  margin: 6px 0 0;
+}
+
+.field.has-error .field-error {
+  display: block;
+}
+
 .field-row {
   display: flex;
   gap: 10px;
@@ -441,6 +461,57 @@ main {
 
 .field-row .field {
   flex: 1;
+}
+
+/* =========================
+   Sección opcional desplegable
+   ========================= */
+
+.optional-toggle-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 2px;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 4px;
+}
+
+.optional-toggle-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.18s ease;
+  flex-shrink: 0;
+}
+
+.optional-toggle-btn.open svg {
+  transform: rotate(180deg);
+}
+
+.optional-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.2s ease;
+}
+
+.optional-content.open {
+  grid-template-rows: 1fr;
+  margin-bottom: 4px;
+}
+
+.optional-content > * {
+  overflow: hidden;
+}
+
+.optional-content .field {
+  padding-top: 2px;
 }
 
 .sheet-actions {

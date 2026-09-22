@@ -31,6 +31,17 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('saveBtn')
     .addEventListener('click', saveCurrentItem);
 
+  // Sección opcional desplegable
+  document.getElementById('optionalToggleBtn')
+    .addEventListener('click', toggleOptionalSection);
+
+  // Quitar el error en cuanto el usuario empieza a corregir el campo
+  document.getElementById('inpTitulo')
+    .addEventListener('input', () => clearFieldError('inpTitulo', 'errorTitulo'));
+
+  document.getElementById('inpFecha')
+    .addEventListener('input', () => clearFieldError('inpFecha', 'errorFecha'));
+
   // Detalle
   detailOverlay.addEventListener('click', closeOverlayOnBackdrop);
 

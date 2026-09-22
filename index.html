@@ -53,20 +53,17 @@
           <button type="button" id="typeEntrega" class="entrega">Entrega</button>
         </div>
 
-        <div class="field" id="fieldAsignatura" style="display:none;">
-          <label for="inpAsignatura">Asignatura</label>
-          <input type="text" id="inpAsignatura" placeholder="Ej. Cálculo II">
-        </div>
-
         <div class="field">
           <label id="labelTitulo" for="inpTitulo">Título</label>
           <input type="text" id="inpTitulo" placeholder="Ej. Reunión con tutor">
+          <p class="field-error" id="errorTitulo">Este campo es obligatorio</p>
         </div>
 
         <div class="field-row">
           <div class="field">
             <label for="inpFecha">Fecha</label>
             <input type="date" id="inpFecha">
+            <p class="field-error" id="errorFecha">Este campo es obligatorio</p>
           </div>
 
           <div class="field">
@@ -75,9 +72,21 @@
           </div>
         </div>
 
-        <div class="field" id="fieldLugar">
-          <label for="inpLugar">Lugar (opcional)</label>
-          <input type="text" id="inpLugar" placeholder="Ej. Biblioteca">
+        <button type="button" class="optional-toggle-btn" id="optionalToggleBtn">
+          <span id="optionalToggleLabel">Añadir detalles opcionales</span>
+          <svg id="optionalToggleIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+
+        <div class="optional-content" id="optionalContent">
+          <div class="field" id="fieldAsignatura" style="display:none;">
+            <label for="inpAsignatura">Asignatura</label>
+            <input type="text" id="inpAsignatura" placeholder="Ej. Cálculo II">
+          </div>
+
+          <div class="field" id="fieldLugar">
+            <label for="inpLugar">Lugar</label>
+            <input type="text" id="inpLugar" placeholder="Ej. Biblioteca">
+          </div>
         </div>
 
         <div class="sheet-actions">
