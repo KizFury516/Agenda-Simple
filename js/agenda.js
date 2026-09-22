@@ -361,12 +361,19 @@ function toggleDelivered() {
   render();
 }
 
-function deleteCurrentItem() {
-  if (!confirm('¿Eliminar este elemento?')) return;
+function askDeleteConfirmation() {
+  document.getElementById('confirmOverlay').classList.add('open');
+}
 
+function cancelDelete() {
+  document.getElementById('confirmOverlay').classList.remove('open');
+}
+
+function confirmDeleteCurrentItem() {
   items = items.filter(item => item.id !== detailId);
 
   saveItems(items);
+  document.getElementById('confirmOverlay').classList.remove('open');
   detailOverlay.classList.remove('open');
   render();
 }

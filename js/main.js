@@ -52,7 +52,18 @@ document.addEventListener('DOMContentLoaded', () => {
     .addEventListener('click', toggleDelivered);
 
   document.getElementById('detailDeleteBtn')
-    .addEventListener('click', deleteCurrentItem);
+    .addEventListener('click', askDeleteConfirmation);
+
+  // Confirmación de eliminar
+  const confirmOverlay = document.getElementById('confirmOverlay');
+
+  confirmOverlay.addEventListener('click', closeOverlayOnBackdrop);
+
+  document.getElementById('confirmCancelBtn')
+    .addEventListener('click', cancelDelete);
+
+  document.getElementById('confirmDeleteBtn')
+    .addEventListener('click', confirmDeleteCurrentItem);
 
   // Datos iniciales
   items = loadItems();
